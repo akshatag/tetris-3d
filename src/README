@@ -1,0 +1,50 @@
+
+The Game class contains the main menu, which brings up the main screen with the "New Game" and "Instructions" 
+options. Upon clicking "New Game," a new Render Frame object is created. There are two components to the Render Frame: 
+
+1. The actual game, encapsulated by the Renderer object. 
+2. The decorated bar on the side, telling you your score, an instance of the SideBar class. 
+
+The Renderer sets up the display. It also instantiates the GameMatrix and GameLogic. The GameMatrix keeps track of  
+all the pieces in the game, helps detect collisions, and helps visually render the game matrix onto the screen. The GameLogic 
+class provides a centralized location for various game constants, such as the penalty for using the undo button, or the amount 
+of points awarded for finishing a level, or how much faster the pieces fall when finishing a level.
+
+The Shape interface ensures that all the various "shapes" used in the game will follow a standardized convention - they will have
+draw, rotate, and translate methods. Furthermore, these methods will all accept the same input format (same parameters, etc.). This way, 
+even from the Game Matrix, which is keeping track of various pieces, in order to draw the whole matrix, all that has to be done is call the 
+draw command. 
+
+The most basic Shape is the Cube. The cube is passed coordinates for its center, and the length of a side. The coordinates for the center are important
+for rotation and translation purposes. Since OpenGL requires you to enumerate all the vertices of an object, the Cube serves as the building block
+for the rest of the pieces. The Cube's draw method actually tells OpenGL which vertices to draw. This is good because we don't have to worry about 
+vertices for the other pieces -- we just tell the Cubes they are comprised of to draw themselves. 
+
+The Piece class also implements Shape. The Piece class represents a more complicated piece, one that the user will have to put into the game matrix
+to win the game. This is the piece that is slowly falling onto the board. It could be a cube if you are lucky, but will often be a more complex
+shape. A Piece is essentially a Collection of cubes. I chose to use an ArrayList because, in the future, I might want to have pieces in which each
+cube has a special property (a cool feature, one might say), and in which the order of the cubes matters. I might also want to allow duplicate cubes in the same piece. 
+Though I haven't implemented these features yet, I may at some point in the future. 
+
+The Piece also maintains a 3D array. Each spot in the array contains either a 0 or a 1. If the index contains a 1, a cube is rendered there. If not, 
+no cube is rendered. The reason I chose to implement a 3D array "template" was to make rotations and translations easier. When I want to rotate the 
+Piece, I rotate the 3D array indices and then rebuild my set of Cubes to be rendered. 
+
+This all works out nicely in the Game Matrix. The Game Matrix must detect collisions to know when a piece can't move further down. It must be 
+able to stop the player from rotating or translating the piece out of the matrix. To detect collisions due to translation, 3 parameters, representing 
+the translation vector are passed. Using this information, the matrix can figure out if there is a cube already stationed where the piece is trying to go. 
+If this is the case, the translation is nullified. For rotation, we tell the falling Piece to give us the list of cubes that would result if we were to rotate
+the piece. If this new list causes collisions, we don't rotate the piece. Otherwise, we allow the pieces to rotate. 
+
+Finally, the "Undo" functionality is simple enough. The Undo button is a stack of the collection of cubes. Every ßtime the player 
+successfully lands a piece, that collection of cubes is pushed to the stack. When the user hits undo, the stack is popped and the 
+topmost collection of cubes is removed from the game matrix. 
+
+And that's it!
+
+Summary of Data Structures: 
+1. The actual Game Matrix uses a 3D array to keep track of where the pieces are. 
+2. The Piece class uses a 3D array as a "template" to make rotating easier. 
+3. The Game Marix classes uses a Stack to keep track of undo actions. 
+4. Each Piece is represented as a Collection of Cubes.
+5. The cube itself is a "data structure" of sorts, calculating and storing the vertices necessary to render more complex shapes.  
