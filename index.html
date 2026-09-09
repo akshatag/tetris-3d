@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetrahedris - Tetris in 3D</title>
+    <link rel="stylesheet" href="/web/style.css" />
+  </head>
+  <body>
+    <canvas id="scene"></canvas>
+
+    <div id="hud">
+      <div class="hud-row"><span>Score</span><b id="score">0</b></div>
+      <div class="hud-row"><span>Level</span><b id="level">1</b></div>
+      <div class="hud-row"><span>Layers</span><b id="layers">0</b></div>
+    </div>
+
+    <div id="keys">
+      <div><kbd>&larr;</kbd><kbd>&rarr;</kbd><kbd>&uarr;</kbd><kbd>&darr;</kbd> move</div>
+      <div><kbd>R</kbd> + arrows / <kbd>Space</kbd> rotate</div>
+      <div><kbd>Shift</kbd> soft drop &middot; <kbd>Enter</kbd> hard drop</div>
+      <div><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> camera &middot; <kbd>X</kbd> undo</div>
+      <div><kbd>P</kbd> pause</div>
+    </div>
+
+    <div id="overlay">
+      <div class="panel">
+        <h1>TETRAHEDRIS</h1>
+        <p class="aside">Tetris in 3D</p>
+        <p id="overlay-text">
+          Stack the falling pieces to fill a complete 5&times;5 layer. Full layers
+          clear and everything above collapses down. The game ends when the stack
+          reaches the top.
+        </p>
+        <button id="start">NEW GAME</button>
+        <button id="instructions-toggle" class="link">INSTRUCTIONS</button>
+        <div id="instructions" hidden>
+          <ul>
+            <li><b>Arrow keys</b> slide the piece across the board.</li>
+            <li><b>Hold R</b> and press an arrow (or <b>Space</b>) to rotate about the X, Y and Z axes.</li>
+            <li><b>Shift</b> soft-drops for bonus points, <b>Enter</b> hard-drops.</li>
+            <li><b>W/S</b> raise and lower the camera, <b>A/D</b> orbit it.</li>
+            <li><b>X</b> undoes the last landed piece &mdash; it costs an escalating point penalty.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/web/main.ts"></script>
+  </body>
+</html>
