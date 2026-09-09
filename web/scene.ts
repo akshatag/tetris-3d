@@ -26,14 +26,14 @@ export class Scene {
 
   private orbit = Math.PI / 4;
   private elevation = 0.55;
-  private distance = 16;
+  private distance = 22;
 
   constructor(canvas: HTMLCanvasElement) {
     this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     this.scene.background = new THREE.Color(0x05070f);
-    this.scene.fog = new THREE.Fog(0x05070f, 22, 46);
+    this.scene.fog = new THREE.Fog(0x05070f, 30, 60);
 
     this.camera = new THREE.PerspectiveCamera(45, 1, 0.1, 200);
 
@@ -134,7 +134,7 @@ export class Scene {
   }
 
   zoomBy(delta: number): void {
-    this.distance = THREE.MathUtils.clamp(this.distance + delta, 8, 34);
+    this.distance = THREE.MathUtils.clamp(this.distance + delta, 10, 40);
   }
 
   render(game: Game): void {
@@ -152,7 +152,7 @@ export class Scene {
       }
     }
 
-    const focus = new THREE.Vector3(0, MATRIX_HEIGHT * 0.35, 0);
+    const focus = new THREE.Vector3(0, MATRIX_HEIGHT * 0.45, 0);
     const horizontal = Math.cos(this.elevation) * this.distance;
     this.camera.position.set(
       focus.x + Math.cos(this.orbit) * horizontal,
