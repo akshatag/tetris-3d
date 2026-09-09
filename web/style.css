@@ -1,0 +1,150 @@
+:root {
+  --ink: #e9f0ff;
+  --panel: rgba(11, 16, 32, 0.82);
+  --accent: #4cc9f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #05070f;
+  color: var(--ink);
+  font-family: "Courier New", Courier, monospace;
+}
+
+#scene {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+#hud,
+#keys {
+  position: fixed;
+  padding: 14px 18px;
+  background: var(--panel);
+  border: 1px solid rgba(76, 201, 240, 0.35);
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+}
+
+#hud {
+  top: 20px;
+  left: 20px;
+  min-width: 180px;
+}
+
+.hud-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 18px;
+  line-height: 1.7;
+  letter-spacing: 1px;
+}
+
+.hud-row b {
+  color: var(--accent);
+}
+
+#keys {
+  bottom: 20px;
+  left: 20px;
+  font-size: 13px;
+  line-height: 1.9;
+  opacity: 0.85;
+}
+
+kbd {
+  display: inline-block;
+  min-width: 20px;
+  padding: 1px 5px;
+  margin-right: 2px;
+  text-align: center;
+  border: 1px solid rgba(233, 240, 255, 0.4);
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 7, 15, 0.72);
+}
+
+#overlay[hidden] {
+  display: none;
+}
+
+.panel {
+  width: min(560px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px 36px;
+  text-align: center;
+  background: var(--panel);
+  border: 1px solid rgba(76, 201, 240, 0.35);
+  border-radius: 14px;
+}
+
+.panel h1 {
+  margin: 0;
+  font-size: 42px;
+  letter-spacing: 6px;
+  color: #ff5d73;
+}
+
+.panel .aside {
+  margin: 4px 0 20px;
+  font-style: italic;
+  opacity: 0.75;
+}
+
+#overlay-text {
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+button {
+  display: block;
+  width: 100%;
+  margin: 14px auto 0;
+  padding: 12px;
+  font: inherit;
+  letter-spacing: 3px;
+  color: #05070f;
+  background: var(--accent);
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.12);
+}
+
+button.link {
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid rgba(233, 240, 255, 0.35);
+}
+
+#instructions {
+  margin-top: 18px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+#instructions[hidden] {
+  display: none;
+}
